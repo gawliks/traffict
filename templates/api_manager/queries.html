@@ -1,0 +1,25 @@
+{% extends 'api_manager/api_details.html' %}
+{% block api-queries %}
+<table>
+    <thead>
+    <tr><td>URL</td><td>Method</td><td>Body</td><td></td></tr>
+    </thead>
+    <tbody>
+    {% for query in queries %}
+    <tr class="query-row" id="{{ query.api_id }}-{{ query.id }}">
+        <td>{{ query.url }}</td><td>{{ query.method }}</td><td>{{ query.body }}</td>
+        <td><a href="{% url 'api_manager:edit_query' query.api_id query.id %}">Edit</a></td>
+        <td><a href="{% url 'api_manager:delete_query' query.id %}">Delete</a></td>
+    </tr>
+    {% endfor %}
+    <tr class="query-row" id="{{ api_id }}">
+        <td></td><td></td><td></td>
+        <td><a href="{% url 'api_manager:new_query' api_id %}">Add</a></td>
+    </tr>
+    </tbody>
+</table>
+<div id="query-form">
+    {% block query-form %}
+    {% endblock %}
+</div>
+{% endblock %}

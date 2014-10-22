@@ -1,0 +1,8 @@
+{% extends 'api_manager/queries.html' %}
+{% block query-form %}
+<form method="post" action="{% if query_id %}{% url 'api_manager:edit_query' api_id query_id %}{% else %}{% url 'api_manager:new_query' api_id %}{% endif %}">
+    {% csrf_token %}
+    {{ query_form }}
+    <input type="submit" class="button tiny" value="Save" />
+</form>
+{% endblock %}

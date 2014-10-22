@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block app-name %}
+    <a href="{% url 'api_manager:index' %}">Traffict API Manager</a></li>
+{% endblock %}
+{% block main-menu %}
+    <li class="has-dropdown">
+        <a href="#">Apis</a>
+        <ul class="dropdown">
+            {% for api in apis %}
+                <li class="active"><a href="{% url 'api_manager:edit_api' api.id %}">{{ api.name }}</a></li>
+            {% endfor %}
+            <li class="active"><a href="{% url 'api_manager:new_api' %}">Add new API</a></li>
+        </ul>
+    </li>
+{% endblock %}
+{% block content %}
+<div id="subcontainer">
+    {% block apiform %}{% endblock %}
+</div>
+{% endblock %}
+{% block scripts %}
+{% endblock %}

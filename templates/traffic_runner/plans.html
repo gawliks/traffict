@@ -1,0 +1,32 @@
+{% extends 'traffic_runner/index.html' %}
+{% block content %}
+<div id="subcontainer" class="medium">
+    <table>
+        <thead>
+        <tr><td>Name</td><td>Query</td><td>Running time</td><td>Interval</td><td></td><td></td></tr>
+        </thead>
+        <tbody>
+        <form method="post" action="{% static 'traffic_runner:plan'" id="plans-form">
+            {% csfr_token %}
+            {{ formset.management_form }}
+            {% for form in formset %}
+                <tr>
+                    <td>{{ form.name }}</td>
+                    <td>{{ form.query }}</td>
+                    <td>{{ form.test_time }}</td>
+                    <td>{{ form.interval }}</td>
+                    <td><input type="submit" value="Save" class="button tiny"></td>
+                </tr>
+            {% endfor %}
+        </form>
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript">
+    require(["plans"], function(plans) {
+        console.log("plans loaded");
+    });
+</script>
+{% endblock %}

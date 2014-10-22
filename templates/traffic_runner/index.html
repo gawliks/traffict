@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block app-name %}
+    <a href="{% url 'traffic_runner:index' %}">Traffict query runner</a></li>
+{% endblock %}
+{% block main-menu %}
+    <ul class="has-dropdown">
+        <li class="active">
+            <a href="{% url 'traffic_runner:add_plan' %}">Set a plan</a>
+        </li>
+        <li>
+            <a href="{% url 'traffic_runner:plans' %}">Plans</a>
+        </li>
+    </ul>
+{% endblock %}
+{% block content %}
+{% endblock %}

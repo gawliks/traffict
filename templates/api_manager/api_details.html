@@ -1,0 +1,29 @@
+{% extends 'api_manager/index.html' %}
+{% block apiform %}
+    <form action="{% if object_id %}{% url 'api_manager:edit_api' api_id %}{% else %}{% url 'api_manager:new_api' %}{% endif %}" method="POST">
+        {% csrf_token %}
+       {{ api_form }}
+       <input class="button tiny" type="submit" value="Save" />
+    </form>
+    {% if api_id %}
+        <ul class="small-block-grid-3">
+            <li>
+                <form action="{% url 'api_manager:delete_api' api_id %}" data-bind="submit: confirmDelete">
+                    <button class="button tiny" type="submit">Delete</button>
+                </form>
+            </li>
+            <li>
+                {%comment%}
+                <button class="button tiny" onclick="new VMFactory({module:'query', vmSettings:{apiId: {{api_id}} }});">Queries</button>
+                {%endcomment%}
+                <form action="{% url 'api_manager:queries' api_id %}">
+                    <input type="submit" value="Queries" class="button tiny" />
+                </form>
+            </li>
+        <div id="query-container">
+            {% block api-queries %}{% endblock %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+
